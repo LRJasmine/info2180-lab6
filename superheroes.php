@@ -1,5 +1,3 @@
-//commit
-
 <?php
 
 $superheroes = [
