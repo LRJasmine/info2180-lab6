@@ -70,3 +70,22 @@ $superheroes = [
   <li><?= $superhero['alias']; ?></li>
 <?php endforeach; ?>
 </ul>
+
+<p>
+<?php
+  
+  echo $_GET["searchBar"];
+  $search = "";
+  if ($_SERVER["REQUEST_METHOD"] == "GET"){
+      $search = filter_input(INPUT_GET,"searchBar",FILTER_SANITIZE_STRING);
+      foreach ($superhero as $hero){
+        if ($hero["name"]===$search||$hero["alias"]===$search){
+          echo $hero;
+        }else{
+          echo "No result";
+        }
+      }
+
+  }
+?>
+</p>
