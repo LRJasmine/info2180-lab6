@@ -74,15 +74,15 @@ $superheroes = [
 <p>
 <?php
   
-  echo $_GET["searchBar"];
+  //echo $_GET["query"];
   $search = "";
   if ($_SERVER["REQUEST_METHOD"] == "GET"){
-      $search = filter_input(INPUT_GET,"searchBar",FILTER_SANITIZE_STRING);
-      foreach ($superhero as $hero){
-        if ($hero["name"]===$search||$hero["alias"]===$search){
+      $search = filter_input(INPUT_GET,"query",FILTER_SANITIZE_STRING);
+      foreach ($superheroes as $hero){
+        if ($hero['name']==$search||$hero['alias']==$search){
           echo $hero;
         }else{
-          echo "No result";
+          //echo "No result";
         }
       }
 
