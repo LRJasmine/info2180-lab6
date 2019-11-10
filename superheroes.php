@@ -65,27 +65,26 @@ $superheroes = [
 
 ?>
 
-<ul>
-<?php foreach ($superheroes as $superhero): ?>
-  <li><?= $superhero['alias']; ?></li>
-<?php endforeach; ?>
-</ul>
-
-<p>
-<?php
-  
-  //echo $_GET["query"];
-  $search = "";
-  if ($_SERVER["REQUEST_METHOD"] == "GET"){
-      $search = filter_input(INPUT_GET,"query",FILTER_SANITIZE_STRING);
-      foreach ($superheroes as $hero){
-        if ($hero['name']==$search||$hero['alias']==$search){
-          echo $hero;
-        }else{
-          //echo "No result";
-        }
+<?php 
+  $nofind = 'SUPERHERO NOT FOUND';
+  if ($_SERVER['REQUEST_METHOD'] === 'GET'){
+      $search = filter_input(INPUT_GET,'query',FILTER_SANITIZE_STRING);
+      if ($search == ""){?>
+          <ul>
+          <?php foreach ($superheroes as $superhero): ?>
+          <li><?= $superhero['alias']; ?></li>
+          <?php endforeach; ?>
+          </ul>
+  <?php }else {
+      foreach ($superheroes as $hero):
+      if ($hero['name']==$search||$hero['alias']==$search){?>
+          <h3><?= $hero['alias']; ?></h3>
+          <h4><?= $hero['name']; ?></h4>
+          <p><?= $hero['biography']; ?></p>
+        <?php $nofind = "";
+      }elseif ($nofind != "" && $hero["id"] == 10){?> 
+          <h3><font color = "red"><?=$nofind ;?></font></h3>
+          <?php }
+      endforeach;
       }
-
-  }
-?>
-</p>
+  }?>
